@@ -1,10 +1,21 @@
 package ua.lviv.iot.spring.lab7.rest.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
+@Entity
+/*/@EnableAutoConfiguration*/
 public class Student {
 
 		private String firstName;
 
 		private String lastName;
+		@Id
+		@GeneratedValue(strategy = GenerationType.AUTO)
 		private int id;
 
 		public int getId() {
