@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ua.lviv.iot.spring.lab7.dataaccess.GroupRepository;
 import ua.lviv.iot.spring.lab7.rest.model.Group;
+
 @Service
 public class GroupService {
 	@Autowired

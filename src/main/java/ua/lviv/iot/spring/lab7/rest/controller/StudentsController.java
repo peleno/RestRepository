@@ -1,12 +1,6 @@
 package ua.lviv.iot.spring.lab7.rest.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import ua.lviv.iot.spring.lab7.business.StudentService;
-import ua.lviv.iot.spring.lab7.rest.model.Student;
-
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,8 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ua.lviv.iot.spring.lab7.business.StudentService;
+import ua.lviv.iot.spring.lab7.rest.model.Student;
 
 @RequestMapping("/students")
 @RestController
@@ -32,9 +30,12 @@ public class StudentsController {
 	@Autowired
 	private StudentService studentService;
 
-	@GetMapping
-	public List<Student> getStudents() {
-		return new LinkedList<Student>(students.values());
+	@GetMapping(path = "?firstName={firstName}")
+	public List<Student> getStudents(final @RequestParam(name = "firstName", required = false) String firstName) {
+		if (firstName == null) {
+			return studentService.findAll();
+		}
+		return studentService.getAllByFirstName(firstName);
 	}
 
 	@GetMapping(path = "/{id}")
@@ -53,8 +54,10 @@ public class StudentsController {
 		return ResponseEntity.status(status).build();
 
 	}
+
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Student> updateStudent(final @PathVariable("id") Integer studentId, final @RequestBody Student student) {
+	public ResponseEntity<Student> updateStudent(final @PathVariable("id") Integer studentId,
+			final @RequestBody Student student) {
 		student.setId(studentId);
 		HttpStatus status = students.put(studentId, student) == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 		return ResponseEntity.status(status).build();

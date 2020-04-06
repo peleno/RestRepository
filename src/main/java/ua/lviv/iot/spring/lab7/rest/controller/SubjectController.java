@@ -7,18 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ua.lviv.iot.spring.lab7.business.GroupService;
-import ua.lviv.iot.spring.lab7.rest.model.Group;
+import ua.lviv.iot.spring.lab7.business.SubjectService;
+import ua.lviv.iot.spring.lab7.rest.model.Subject;
 
-@RequestMapping("/groups")
+@RequestMapping("/subjects")
 @RestController
-public class GroupsController {
+public class SubjectController {
 	@Autowired
-	private GroupService groupService;
+	SubjectService subjectService;
 
 	@GetMapping
-	public List<Group> getGroups() {
-		return groupService.findAll();
+	public List<Subject> getSubjects() {
+		return subjectService.findAll();
 	}
-
 }

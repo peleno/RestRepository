@@ -3,9 +3,8 @@ package ua.lviv.iot.spring.lab7.dataaccess;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ua.lviv.iot.spring.lab7.rest.model.Group;
-
+import ua.lviv.iot.spring.lab7.rest.model.Subject;
 @Repository
-public interface GroupRepository extends JpaRepository<Group, Integer> {
+public interface SubjectRepository extends JpaRepository<Subject, Integer> {
 
 }

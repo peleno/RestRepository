@@ -1,6 +1,5 @@
 package ua.lviv.iot.spring.lab7.rest.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,13 +15,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity(name = "groups")
 public class Group {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int groupId;
 	@Column
 	private int enrollmentYear;
 	@Column
 	private String groupName;
-	@OneToMany(mappedBy = "group",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
 	@JsonIgnoreProperties("group")
 	private Set<Student> students;
 
