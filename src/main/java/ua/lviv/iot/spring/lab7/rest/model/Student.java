@@ -2,6 +2,7 @@ package ua.lviv.iot.spring.lab7.rest.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQuery;
@@ -26,11 +28,15 @@ public class Student {
 	private String firstName;
 	@Column
 	private String lastName;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("students")
 	@JoinColumn(name = "group_id")
 	private Group group;
-	@ManyToMany(mappedBy = "students")
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "Student_Subjects", joinColumns = {
+			@JoinColumn(name = "student_id", nullable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "subject_id", nullable = false) })
+	
 	@JsonIgnoreProperties("students")
 	private Set<Subject> subjects;
 

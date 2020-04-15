@@ -2,6 +2,7 @@ package ua.lviv.iot.spring.lab7.rest.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +22,7 @@ public class Group {
 	private int enrollmentYear;
 	@Column
 	private String groupName;
-	@OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "group", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("group")
 	private Set<Student> students;
 
