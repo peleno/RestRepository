@@ -22,7 +22,7 @@ public class Subject {
 	@Column
 	private String name;
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "Student_Subjects", joinColumns = {
+	@JoinTable(name = "Student_Subject", joinColumns = {
 			@JoinColumn(name = "subject_id", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "student_id", nullable = false) })
 	@JsonIgnoreProperties("subjects")

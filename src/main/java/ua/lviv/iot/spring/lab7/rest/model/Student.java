@@ -33,7 +33,7 @@ public class Student {
 	@JoinColumn(name = "group_id")
 	private Group group;
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "Student_Subjects", joinColumns = {
+	@JoinTable(name = "Student_Subject", joinColumns = {
 			@JoinColumn(name = "student_id", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "subject_id", nullable = false) })
 	
